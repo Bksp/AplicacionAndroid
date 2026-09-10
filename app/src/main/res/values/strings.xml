@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Registro Multimedia</string>
+    <string name="titulo_formulario">Registro de Integrante</string>
+    <string name="hint_nombre">Nombre Completo</string>
+    <string name="hint_correo">Correo Electrónico</string>
+    <string name="btn_guardar">Guardar Integrante</string>
+
+    <string name="titulo_indicadores">Indicadores del Sistema</string>
+    <string name="total_integrantes">Integrantes: 0</string>
+    <string name="audios_grabados">Audios: 0</string>
+
+    <string name="titulo_audio">Módulo de Audio</string>
+    <string name="btn_grabar_audio">Grabar Audio</string>
+    <string name="btn_reproducir_audio">Reproducir Audio</string>
+    <string name="estado_audio">Audio: Inactivo</string>
+
+    <string name="titulo_lista">Listado de Integrantes</string>
+</resources>
