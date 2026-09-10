@@ -1,0 +1,39 @@
+# Archivos generados y ejecutables
+*.apk
+*.aar
+*.aab
+*.class
+*.dex
+
+# Carpetas de compilación
+build/
+**/build/
+.gradle/
+captures/
+.externalNativeBuild/
+.cxx/
+out/
+
+# Configuración local (rutas del SDK de cada desarrollador)
+local.properties
+
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+.navigation/
+
+# Logs e informes de fallos
+*.log
+crashlytics-build.properties
+
+# Archivos de caché
+.DS_Store
+Thumbs.db
+.gradle-cache/
+
+# Firmas y seguridad (¡Evita subir contraseñas a GitHub!)
+*.jks
+*.keystore
+*keystore.properties
+*.key

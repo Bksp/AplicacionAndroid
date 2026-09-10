@@ -22,10 +22,10 @@ Este repositorio implementa una arquitectura **MVVM estricta** en Java 100% para
 Para garantizar la compatibilidad exacta con la rúbrica docente y evitar errores de compilación, todo el equipo debe utilizar estrictamente las siguientes versiones:
 
 * **IDE Recomendado:** Android Studio (Ladybug / Jellyfish / Iguana o superior).
-* **Lenguaje:** **Java 1.8 / 11** (Strictly No Kotlin / No Jetpack Compose).
+* **Lenguaje:** **Java 11** (Strictly No Kotlin / No Jetpack Compose).
 * **SDK Mínimo (`minSdk`):** API 24 (Android 7.0 Nougat).
 * **SDK Objetivo y Compilación (`targetSdk` / `compileSdk`):** API 34 o superior.
-* **Sistema de Construcción:** Gradle 8.x con AGP (Android Gradle Plugin) 8.1.1+.
+* **Sistema de Construcción:** Gradle 8.x con AGP (Android Gradle Plugin) 8.1.1+ (Se requiere que el Gradle JDK de Android Studio apunte a un **JDK 11 o superior** compatible con tu versión local de Gradle).
 
 ### Dependencias Principales (`app/build.gradle`)
 El proyecto integra por defecto las siguientes librerías de AndroidX y Material Components:
