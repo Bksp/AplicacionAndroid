@@ -1,19 +1,18 @@
-# Registro Multimedia — Guía del Proyecto, Entorno y Flujo de Git
+# Registro Multimedia de Equipo — Guía del Proyecto, Entorno y Flujo de Git
 
-Este repositorio implementa una arquitectura **MVVM estricta** en Java 100% para el desarrollo colaborativo de 20 personas divididas en 5 grupos. Para evitar conflictos de código y asegurar la estabilidad del sistema, todo el flujo de trabajo, la configuración del entorno y las reglas de auditoría se rigen bajo los siguientes protocolos obligatorios.
+Una aplicación móvil nativa para Android diseñada para la recolección, gestión y visualización dinámica de la información de los integrantes de un equipo de trabajo.
+
+Este repositorio implementa una arquitectura **MVVM estricta** en Java 100% para el desarrollo colaborativo de 20 personas. Para evitar conflictos de código y asegurar la estabilidad del sistema, todo el flujo de trabajo, la configuración del entorno y las reglas de auditoría se rigen bajo los siguientes protocolos obligatorios.
 
 ---
 
-## 1. Descripción General del Proyecto
+## 1. Características Principales
 
-**Registro Multimedia** es una aplicación nativa para Android desarrollada en Java 100% siguiendo una arquitectura **MVVM (Model-View-ViewModel) estricta**. La aplicación está diseñada para ser construida de forma colaborativa entre 20 desarrolladores divididos en 5 equipos de trabajo (G1 a G5).
-
-### Funcionalidades Principales y Módulos:
-1. **Formulario de Registro de Integrantes (G2):** Captura de datos personales (nombre, rol, correo) con validación reactiva de errores mediante `FormViewModel`, `FormBinder` y `FormError`.
-2. **Indicadores y Métricas del Sistema (G3):** Monitor en tiempo real del total de integrantes registrados y audios capturados expuesto vía `IndicatorsViewModel` e `IndicatorsBinder`.
-3. **Módulo de Audio Multimedia (G4):** Captura y reproducción de notas de voz haciendo uso de `MediaRecorder` y `MediaPlayer` a través de `AudioRecorder`, `AudioViewModel` y `AudioBinder`, gestionando permisos de micrófono en runtime con `MicPermissionHelper`.
-4. **Visualización e Interfaz Gráfica (G5):** Presentación del listado de miembros mediante `RecyclerView` (`MemberAdapter`), tarjetas personalizadas (`CardView`), gráficos vectoriales (`ic_avatar.xml`), `MockData` y recursos de UI estandarizados (`strings.xml`, `colors.xml`, `dimens.xml`, `themes.xml`).
-5. **Orquestación Central (G1):** `MainActivity` como View raíz que conecta todos los componentes e instancializa los ViewModels y Binders sin albergar lógica de negocio.
+- **Formulario Interactivo:** Captura de datos utilizando una amplia gama de controles de UI (Spinner, CheckBox, RadioGroup, RatingBar) dentro de un `ScrollView`.
+- **Seguimiento de Progreso:** Visualización del avance matemático mediante un `ProgressBar`.
+- **Integración Multimedia:** Capacidad para grabar audio (micrófono) y reproducir notas de voz localmente en estricto formato `.m4a` con códec AAC.
+- **Listado Dinámico:** Renderizado en tiempo real de los perfiles guardados utilizando un `RecyclerView` con tarjetas (`CardView`).
+- **Gestión de Permisos:** Solicitud dinámica de permisos en tiempo de ejecución para el acceso al micrófono (`RECORD_AUDIO`).
 
 ---
 
@@ -21,166 +20,138 @@ Este repositorio implementa una arquitectura **MVVM estricta** en Java 100% para
 
 Para garantizar la compatibilidad exacta con la rúbrica docente y evitar errores de compilación, todo el equipo debe utilizar estrictamente las siguientes versiones:
 
-* **IDE Recomendado:** Android Studio (Ladybug / Jellyfish / Iguana o superior).
-* **Lenguaje:** **Java 11** (Strictly No Kotlin / No Jetpack Compose).
-* **SDK Mínimo (`minSdk`):** API 24 (Android 7.0 Nougat).
-* **SDK Objetivo y Compilación (`targetSdk` / `compileSdk`):** API 34 o superior.
-* **Sistema de Construcción:** Gradle 8.x con AGP (Android Gradle Plugin) 8.1.1+ (Se requiere que el Gradle JDK de Android Studio apunte a un **JDK 11 o superior** compatible con tu versión local de Gradle).
+- **IDE Requerido:** Android Studio (Panda 1 | 2025.3.1 Patch 1 o superior).
+- **Lenguaje:** **Java 11** (Strictly No Kotlin / No Jetpack Compose).
+- **SDK Mínimo (`minSdk`):** API 24 (Android 7.0 Nougat).
+- **SDK Objetivo y Compilación (`targetSdk` / `compileSdk`):** API 34 o superior.
+- **Sistema de Construcción:** Gradle 8.x con AGP (Android Gradle Plugin) 8.1.1+.
+- **Gradle JDK:** JDK 11 o superior (Asegurar que el IDE apunte a este JDK).
 
-### Dependencias Principales (`app/build.gradle`)
+### Dependencias del Proyecto (`app/build.gradle.kts`)
+
 El proyecto integra por defecto las siguientes librerías de AndroidX y Material Components:
-```groovy
-implementation 'androidx.appcompat:appcompat:1.6.1'
-implementation 'com.google.android.material:material:1.9.0'
-implementation 'androidx.recyclerview:recyclerview:1.3.1'
-implementation 'androidx.cardview:cardview:1.0.0'
-implementation 'androidx.lifecycle:lifecycle-viewmodel:2.6.2'
-implementation 'androidx.lifecycle:lifecycle-livedata:2.6.2'
+
+```kotlin
+implementation("androidx.appcompat:appcompat:1.6.1")
+implementation("com.google.android.material:material:1.13.0")
+implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+implementation("androidx.recyclerview:recyclerview:1.4.0")
+implementation("androidx.cardview:cardview:1.0.0")
+implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")
+implementation("androidx.lifecycle:lifecycle-livedata:2.6.2")
 ```
 
 ---
 
-## 3. Procedimiento para Clonar, Levantar y Ejecutar el Proyecto
+## 3. Arquitectura del Proyecto (MVVM por Capas)
 
-### Paso A: Desde Android Studio (Recomendado)
+El código está estructurado bajo el patrón **MVVM** dividido en 3 capas fundamentales para aislar el trabajo de los distintos equipos:
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd AplicacionAndroid
-   ```
-2. **Abrir en Android Studio:**
-   - Selecciona **File -> Open...** (o *Open* en la pantalla de bienvenida).
-   - Selecciona la carpeta raíz del proyecto (`AplicacionAndroid`).
-3. **Sincronizar dependencias de Gradle:**
-   - Si no inicia automáticamente, haz clic en el icono de elefante **"Sync Project with Gradle Files"** en la barra superior derecha.
-4. **Configurar Emulador o Dispositivo Físico:**
-   - Abre el **Device Manager** en Android Studio.
-   - Crea o inicia un Virtual Device (AVD) con **Android 7.0 (API 24)** o superior.
-   - Si usas un dispositivo físico, activa la *Depuración por USB* (USB Debugging).
-5. **Compilar y Ejecutar:**
-   - Presiona el botón verde de **Run 'app'** (`Shift + F10`) en la barra de herramientas.
-
-### Paso B: Desde la Línea de Comandos (CLI)
-
-Si dispones de Android SDK configurado en tu terminal:
-
-1. **Compilar la APK de depuración:**
-   ```bash
-   ./gradlew assembleDebug
-   ```
-2. **Instalar e iniciar en el emulador o dispositivo conectado:**
-   ```bash
-   ./gradlew installDebug
-   ```
+- **Domain (Dominio):** Representa la capa de datos puros. Contiene el Modelo (`Member.java`) que encapsula los atributos, y las clases con lógicas de validación. No tiene dependencias de Android.
+- **Presentation (Presentación):** Responsable de la UI y el estado. Contiene la `MainActivity`, archivos XML, adaptadores (`MemberAdapter.java`) y el **ViewModel**. La UI solo observa cambios, mientras que el ViewModel procesa la lógica reactiva sin importar clases visuales (`android.view.*`).
+- **Data (Infraestructura y Core):** Encargada del manejo de hardware (`MediaRecorder`, `MediaPlayer`), la solicitud de permisos y el almacenamiento local de la app.
 
 ---
 
 ## 4. Estructura de Ramas
 
-El desarrollo se aísla mediante *Feature Branches* por grupo. Nadie trabaja directamente sobre `main`.
+El repositorio está protegido. Nadie trabaja ni sube código directamente sobre las ramas de integración o producción.
 
-| Rama | Responsable | Propósito y Clases Clave |
-| --- | --- | --- |
-| `main` | Integrador (Alessy) | Rama protegida de producción. Requiere Pull Request y aprobación. |
-| `feat/g2-controles` | Grupo 2 | Lógica de formularios y validaciones (`FormViewModel`, `FormBinder`, `FormError`). |
-| `feat/g3-indicadores` | Grupo 3 | Manejo de contadores y progreso visual (`IndicatorsViewModel`, `IndicatorsBinder`). |
-| `feat/g4-audio` | Grupo 4 | Gestión de hardware y permisos de audio (`AudioRecorder`, `AudioViewModel`, `AudioBinder`, `MicPermissionHelper`). |
-| `feat/g5-diseno` | Grupo 5 | Estructura XML (`activity_main.xml`, `item_member.xml`), recursos (`res/`) y adaptador (`MemberAdapter`, `MembersViewModel`, `MockData`). |
+| Rama Base / Capa    | Propósito                                                                                                                |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `main`              | **Producción.** Intocable. Solo recibe el código final para la entrega.                                                  |
+| `develop`           | **Integración.** Rama de ensamblaje controlada por el equipo Core. Recibe los Pull Requests.                             |
+| `presentation/base` | **Capa de Presentación.** Rama base para la UI, maquetación XML, adaptadores (`MemberAdapter`) y ViewModels.             |
+| `domain/base`       | **Capa de Dominio.** Rama base para entidades del modelo (`Member.java`) y lógicas de validación.                        |
+| `data/base`         | **Capa de Datos.** Rama base para gestión de hardware (`MediaRecorder`, `MediaPlayer`), permisos y almacenamiento local. |
 
-*Nota para los sublíderes:* Dentro de la rama de su grupo, pueden coordinar sub-ramas internas (ej. `feat/g2-spinner`), pero la rama oficial que abrirá el Pull Request hacia `main` debe ser la asignada en la tabla anterior.
+### Nomenclatura de Ramas de Trabajo (Feature Branches)
 
----
+Todo desarrollador debe crear su rama desde la rama base de la capa asignada o desde `develop`:
 
-## 5. Procedimiento para Colaborar y Hacer Push / Pull Request
-
-Cada sublíder de grupo es responsable de gestionar los cambios de su equipo antes de enviarlos a revisión:
-
-1. **Actualiza tu rama local antes de enviar cambios:**
-   ```bash
-   git checkout feat/gX-tu-grupo
-   git pull origin feat/gX-tu-grupo
-   ```
-2. **Sincroniza con los últimos cambios de `main` (Prevención de conflictos):**
-   ```bash
-   git fetch origin main
-   git merge origin/main
-   ```
-   *(Si surgen conflictos en este punto, el grupo responsable debe resolverlos localmente y probar que compile antes de continuar).*
-3. **Sube tus cambios a tu rama remota:**
-   ```bash
-   git push origin feat/gX-tu-grupo
-   ```
-4. **Abre un Pull Request (PR):**
-   - Dirígete a GitHub, ve a la pestaña **Pull Requests** y haz clic en *New Pull Request*.
-   - Selecciona `base: main` y `compare: feat/gX-tu-grupo`.
-   - Utiliza obligatoriamente la **Plantilla de PR** descrita en la sección 7 de este documento.
+- `presentation/<nombre-tarea>` (Ej: `presentation/base`, `presentation/viewmodels`)
+- `domain/<nombre-tarea>` (Ej: `domain/base`, `domain/entidad-member`)
+- `data/<nombre-tarea>` (Ej: `data/base`, `data/media-recorder`)
 
 ---
 
-## 6. Formato y Estándar de Commits
+## 5. Instalación, Ejecución y Flujo de Trabajo (Git)
 
-Para mantener un historial limpio, auditable y fácil de rastrear por parte de la docencia, los mensajes de commit deben seguir strictly el siguiente formato:
+### Clonar y Levantar el Proyecto
 
-```text
-Gx: [verbo de acción en imperativo] breve descripción técnica
+1. Clona este repositorio:
+
+```bash
+git clone https://github.com/Bksp/AplicacionAndroid.git
+cd AplicacionAndroid
 ```
 
-### Ejemplos válidos:
-- `G2: añade validación de campos vacíos en FormViewModel`
-- `G4: implementa permisos de micrófono y configuración de AudioRecorder`
-- `G5: actualiza layout principal y agrega tarjeta de integrante`
+2. Compilar la APK de depuración (CLI): `./gradlew assembleDebug`
+3. Instalar en el emulador (CLI): `./gradlew installDebug`
 
-**Regla de oro:** No se aceptarán commits con mensajes genéricos o vacíos (ej. "cambios", "arreglo", "commit final"). Cada commit debe reflejar una unidad lógica de trabajo trazable al grupo correspondiente.
+### Procedimiento Obligatorio para Desarrollar
+
+1. Asegúrate de estar sincronizado con la rama de integración:
+
+```bash
+git checkout develop
+git pull origin develop
+```
+
+2. Crea tu rama de trabajo según tu asignación en el Kanban:
+
+```bash
+git checkout -b <capa>/<nombre-tarea>
+```
+
+3. Realiza tus cambios, compila localmente y haz commit (ver estándar abajo).
+4. Sube tu rama al servidor:
+
+```bash
+git push origin <capa>/<nombre-tarea>
+```
+
+5. Abre un **Pull Request (PR)** en GitHub directed towards `develop`.
+
+---
+
+## 6. Estándar de Commits
+
+Los mensajes deben seguir una nomenclatura formal y trazable basada en _Conventional Commits_:
+
+- **`feat:`** (Nueva característica) -> _Ej: feat: añade validación de campos vacíos en MemberViewModel_
+- **`fix:`** (Corrección de error) -> _Ej: fix: corrige fuga de memoria en MediaPlayer al destruir Activity_
+- **`ui:`** (Cambios visuales) -> _Ej: ui: actualiza márgenes y colores del CardView de integrantes_
 
 ---
 
 ## 7. Plantilla Obligatoria para Pull Requests (PR)
 
-Al abrir un PR hacia `main`, el sublíder debe rellenar la siguiente estructura en la descripción:
+Al abrir un PR hacia `develop`, debes rellenar la siguiente estructura en la descripción:
 
 ```markdown
 ## Qué hace
+
 (Descripción concisa en un máximo de 2 líneas de los cambios implementados)
 
-## Ítems del contrato / RF que cubre
-- [ ] RF-XX: ...
+## Tarjeta del Kanban resuelta
 
-## Capa de Arquitectura MVVM que toca
-- [ ] Model (`model/`, `data/`)
-- [ ] ViewModel (`viewmodel/`)
-- [ ] View (`ui/`, XML, Adapters)
+(Ejemplo: Resuelve tarea "Diseño de la Tarjeta de Member")
 
-## Archivos modificados fuera del alcance de mi grupo
-(Indicar "Ninguno" o detallar el motivo justificado si se tocó MainActivity u otro archivo)
+## Capa de Arquitectura
 
-## Cómo probarlo
-1. Pasos claros para verificar la funcionalidad en el emulador o dispositivo físico.
-
-## Captura o evidencia
-(Opcional, recomendado para cambios visuales de G5)
+- [ ] Domain (`domain/`)
+- [ ] Presentation (`presentation/`)
+- [ ] Data (`data/`)
 ```
 
 ---
 
-## 8. Criterios de Rechazo y Protocolo de Auditoría (Pull Request)
+## 8. Criterios de Rechazo y Auditoría
 
-El Integrador (Alessy) actúa como guardián estricto del repositorio y aplicará un rechazo automático a cualquier Pull Request que incumpla cualquiera de los siguientes lineamientos técnicos y contractuales:
+El equipo de Integración (Alessy, Sofi, Sebita, Diogo) revisará todo el código. Se aplicará **rechazo automático** a cualquier PR que incumpla lo siguiente:
 
-1. **Infracción del Patrón MVVM (UI en ViewModels):**
-   - Quedan prohibidas las importaciones de `android.widget.*`, `android.view.*`, referencias a `R.id.*`, `R.string.*` o el uso de contextos visuales/Activities dentro de la capa `viewmodel/`.
-   - Todo cambio que rompa el desacoplamiento reactivo mediante `LiveData` será rechazado de inmediato.
-
-2. **Violación de la Matriz de Aislamiento (Archivos Ajenos):**
-   - Ningún grupo tiene permitido modificar archivos pertenecientes a la columna arquitectónica de otro equipo (según la matriz de propiedad asignada).
-   - Cualquier alteración no autorizada en archivos que no correspondan a su rama provocará el cierre fulminante del PR.
-
-3. **Conflictos Activos con `main`:**
-   - El Integrador **no** resolverá los conflictos de código de los grupos.
-   - Todo PR que arroje conflictos pendientes de fusión con la rama principal será devuelto inmediatamente al sublíder para que su equipo realice el `git pull` y la resolución local obligatoria.
-
-4. **Incumplimiento del Estándar de Commits:**
-   - Se rechazarán todos los PRs cuyos historiales de commits no cumplan rigurosamente con la nomenclatura formal `Gx: [acción] descripción`. No se tolerarán mensajes ambiguos, vacíos o que oculten la trazabilidad del trabajo colaborativo exigido por la rúbrica docente.
-
-5. **Omisión de Pruebas o Datos de Validación:**
-   - Todo PR debe incluir explícitamente en su descripción la metodología de prueba funcional para verificar que el módulo compila y opera sin romper los flujos anteriores (como el registro de integrantes o la captura de audio).
+1. **Infracción MVVM:** Importar widgets (`android.widget.*`, `android.view.*`) dentro de los ViewModels.
+2. **Violación de Capas:** Alterar archivos que no corresponden a la etiqueta (`presentation`, `domain`, `data`) de la tarea asignada.
+3. **Conflictos con `develop`:** Todo PR que arroje conflictos pendientes será devuelto para que el desarrollador realice el `git pull origin develop` y los resuelva localmente.
+4. **Mal uso de Git:** Commits genéricos ("arreglos", "commit") o intentos de fusión directa sin pasar por revisión.
