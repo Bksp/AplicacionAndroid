@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Regla 2: ConstraintLayout como raíz y sin anidaciones -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="?attr/colorSurface"> <!-- Modo Claro/Oscuro dinámico -->
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tv_titulo_reproductor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reproduciendo_audio"
+        android:textColor="@color/verde_institucional"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Placeholder Gráfico Central -->
+    <ImageView
+        android:id="@+id/iv_icono_audio"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@android:drawable/ic_lock_silent_mode_off"
+        app:tint="@color/verde_claro"
+        android:layout_marginTop="48dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_titulo_reproductor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Barra de progreso -->
+    <ProgressBar
+        android:id="@+id/pb_repro_progreso"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="30"
+        android:progressTint="@color/verde_institucional"
+        android:layout_marginTop="48dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_icono_audio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Controles de Audio: Botón Pausa -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_repro_play_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_pausa"
+        app:icon="@android:drawable/ic_media_pause"
+        app:backgroundTint="@color/verde_institucional"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toBottomOf="@id/pb_repro_progreso"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_repro_stop"
+        app:layout_constraintHorizontal_chainStyle="packed" />
+
+    <!-- Controles de Audio: Botón Detener -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_repro_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_detener"
+        app:icon="@android:drawable/ic_media_rew"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:strokeColor="@color/verde_institucional"
+        android:textColor="?attr/colorOnSurface"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@id/btn_repro_play_pause"
+        app:layout_constraintBottom_toBottomOf="@id/btn_repro_play_pause"
+        app:layout_constraintStart_toEndOf="@id/btn_repro_play_pause"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón Cerrar (Anclado al fondo) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_repro_close"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="@string/btn_cerrar_reproductor"
+        app:backgroundTint="@color/verde_claro"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

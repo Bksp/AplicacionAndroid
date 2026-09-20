@@ -1,162 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Uso de ConstraintLayout como base -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_light">
+    android:padding="32dp"
+    android:background="?attr/colorSurface"> <!-- Modo claro/oscuro automático -->
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Título referenciado desde strings.xml -->
+    <TextView
+        android:id="@+id/tv_titulo_login"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/margin_medium">
+        android:text="@string/login_titulo"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/verde_institucional"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/til_usuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"/>
 
-        <!-- Sección G2: Formulario de Registro -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/titulo_formulario"
-            android:textSize="@dimen/text_size_title"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
+    <!-- Estándar Material: TextInputLayout para el Usuario -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_usuario"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/login_usuario"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_titulo_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/til_password">
 
-        <EditText
-            android:id="@+id/etNombre"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_usuario_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_nombre"
-            android:inputType="textPersonName"
-            android:layout_marginTop="@dimen/margin_small" />
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/spRol"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="@dimen/margin_small" />
+    <!-- Estándar Material: TextInputLayout para Contraseña -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/login_password"
+        android:layout_marginBottom="32dp"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/til_usuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_ingresar_login">
 
-        <EditText
-            android:id="@+id/etCorreo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_correo"
-            android:inputType="textEmailAddress"
-            android:layout_marginTop="@dimen/margin_small" />
-
-        <Button
-            android:id="@+id/btnGuardar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_guardar"
-            android:layout_marginTop="@dimen/margin_small" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_dark"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_medium" />
-
-        <!-- Sección G3: Indicadores del Sistema -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/titulo_indicadores"
-            android:textSize="@dimen/text_size_title"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
-
-        <LinearLayout
+        <!-- app:passwordToggleEnabled="true" agrega el ícono del "ojito" automáticamente -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/margin_small">
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tvTotalIntegrantes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/total_integrantes"
-                android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/primary" />
+    <!-- Estándar Material: MaterialButton -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_ingresar_login"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="@string/login_btn_ingresar"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/verde_institucional"
+        app:layout_constraintTop_toBottomOf="@id/til_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <TextView
-                android:id="@+id/tvAudiosGrabados"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/audios_grabados"
-                android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/secondary" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_dark"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_medium" />
-
-        <!-- Sección G4: Módulo de Audio -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/titulo_audio"
-            android:textSize="@dimen/text_size_title"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/tvEstadoAudio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/estado_audio"
-            android:textSize="@dimen/text_size_small"
-            android:layout_marginTop="@dimen/margin_small" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/margin_small">
-
-            <Button
-                android:id="@+id/btnGrabarAudio"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btn_grabar_audio"
-                android:layout_marginEnd="@dimen/margin_small" />
-
-            <Button
-                android:id="@+id/btnReproducirAudio"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btn_reproducir_audio"
-                android:enabled="false" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_dark"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_medium" />
-
-        <!-- Sección G5: Listado de Integrantes -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/titulo_lista"
-            android:textSize="@dimen/text_size_title"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvIntegrantes"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="@dimen/margin_small" />
-
-    </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
