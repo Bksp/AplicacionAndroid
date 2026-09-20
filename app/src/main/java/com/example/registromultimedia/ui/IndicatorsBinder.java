@@ -8,6 +8,7 @@ import com.example.registromultimedia.viewmodel.IndicatorsViewModel;
 
 /**
  * Custom View Binder connecting indicators TextViews with IndicatorsViewModel emissions.
+ * Supports both G1 and G2 layout IDs safely.
  */
 public class IndicatorsBinder {
 
@@ -15,8 +16,13 @@ public class IndicatorsBinder {
     private final TextView tvRecordedAudios;
 
     public IndicatorsBinder(View rootView) {
-        tvTotalMembers = rootView.findViewById(R.id.tvTotalIntegrantes);
-        tvRecordedAudios = rootView.findViewById(R.id.tvAudiosGrabados);
+        View vTotal = rootView.findViewById(R.id.tvTotalIntegrantes);
+        if (vTotal == null) vTotal = rootView.findViewById(R.id.tv_total_integrantes);
+        tvTotalMembers = (vTotal instanceof TextView) ? (TextView) vTotal : null;
+
+        View vAudios = rootView.findViewById(R.id.tvAudiosGrabados);
+        if (vAudios == null) vAudios = rootView.findViewById(R.id.tv_audios_grabados);
+        tvRecordedAudios = (vAudios instanceof TextView) ? (TextView) vAudios : null;
     }
 
     public void bind(LifecycleOwner owner, IndicatorsViewModel indicatorsViewModel) {

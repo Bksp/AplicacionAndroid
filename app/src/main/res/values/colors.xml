@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Colores por defecto del tema base -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,9 +8,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="gray_light">#F5F5F5</color>
-    <color name="gray_dark">#424242</color>
-    <color name="primary">#1E88E5</color>
-    <color name="primary_variant">#1565C0</color>
-    <color name="secondary">#26A69A</color>
+
+    <!-- Colores Institucionales para tu interfaz -->
+    <color name="verde_institucional">#006341</color>
+    <color name="verde_claro">#78A22F</color>
+    <color name="fondo_oscuro">#121212</color>
+    <color name="superficie_tarjeta">#1E1E1E</color>
+
+    <!-- Colores requeridos por la lista de integrantes -->
+    <color name="primary">#006341</color>
+    <color name="gray_dark">#666666</color>
 </resources>

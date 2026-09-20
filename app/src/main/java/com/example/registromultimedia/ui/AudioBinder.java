@@ -11,6 +11,7 @@ import com.example.registromultimedia.viewmodel.AudioViewModel;
 
 /**
  * Custom View Binder connecting Audio UI controls with AudioViewModel.
+ * Supports both G1 and G2 layout IDs safely.
  */
 public class AudioBinder {
 
@@ -19,55 +20,72 @@ public class AudioBinder {
     private final TextView tvAudioState;
 
     public AudioBinder(View rootView) {
-        btnRecordAudio = rootView.findViewById(R.id.btnGrabarAudio);
-        btnPlayAudio = rootView.findViewById(R.id.btnReproducirAudio);
-        tvAudioState = rootView.findViewById(R.id.tvEstadoAudio);
+        View vRecord = rootView.findViewById(R.id.btnGrabarAudio);
+        if (vRecord == null) vRecord = rootView.findViewById(R.id.btn_iniciar_grabacion);
+        btnRecordAudio = (vRecord instanceof Button) ? (Button) vRecord : null;
+
+        View vPlay = rootView.findViewById(R.id.btnReproducirAudio);
+        if (vPlay == null) vPlay = rootView.findViewById(R.id.btn_detener_grabacion);
+        if (vPlay == null) vPlay = rootView.findViewById(R.id.btn_reproducir_audio_1);
+        btnPlayAudio = (vPlay instanceof Button) ? (Button) vPlay : null;
+
+        View vState = rootView.findViewById(R.id.tvEstadoAudio);
+        if (vState == null) vState = rootView.findViewById(R.id.tv_estado_audio);
+        tvAudioState = (vState instanceof TextView) ? (TextView) vState : null;
     }
 
     public void bind(LifecycleOwner owner, AudioViewModel audioViewModel, MicPermissionHelper micPermissionHelper, Runnable onAudioRecordedSuccess) {
-        btnRecordAudio.setOnClickListener(v -> {
-            if (!micPermissionHelper.hasPermission()) {
-                micPermissionHelper.requestPermission();
-                return;
-            }
-            audioViewModel.toggleRecording();
-        });
+        if (btnRecordAudio != null) {
+            btnRecordAudio.setOnClickListener(v -> {
+                if (!micPermissionHelper.hasPermission()) {
+                    micPermissionHelper.requestPermission();
+                    return;
+                }
+                audioViewModel.toggleRecording();
+            });
+        }
 
-        btnPlayAudio.setOnClickListener(v -> audioViewModel.togglePlayback());
+        if (btnPlayAudio != null) {
+            btnPlayAudio.setOnClickListener(v -> audioViewModel.togglePlayback());
+        }
 
         audioViewModel.getAudioState().observe(owner, state -> {
             if (state == null) return;
 
             switch (state) {
                 case IDLE:
-                    btnRecordAudio.setText("Grabar Audio");
-                    btnPlayAudio.setEnabled(false);
-                    tvAudioState.setText("Audio: Inactivo");
+                    if (btnRecordAudio != null) btnRecordAudio.setText("Grabar Audio");
+                    if (btnPlayAudio != null) btnPlayAudio.setEnabled(false);
+                    if (tvAudioState != null) tvAudioState.setText("Audio: Inactivo");
                     break;
                 case RECORDING:
-                    btnRecordAudio.setText("Detener Grabación");
-                    btnPlayAudio.setEnabled(false);
-                    tvAudioState.setText("Audio: Grabando...");
+                    if (btnRecordAudio != null) btnRecordAudio.setText("Detener Grabación");
+                    if (btnPlayAudio != null) btnPlayAudio.setEnabled(false);
+                    if (tvAudioState != null) tvAudioState.setText("Audio: Grabando...");
                     break;
                 case RECORDED:
-                    btnRecordAudio.setText("Grabar Nuevo Audio");
-                    btnPlayAudio.setEnabled(true);
-                    btnPlayAudio.setText("Reproducir Audio");
-                    tvAudioState.setText("Audio: Grabación Lista");
+                    if (btnRecordAudio != null) btnRecordAudio.setText("Grabar Nuevo Audio");
+                    if (btnPlayAudio != null) {
+                        btnPlayAudio.setEnabled(true);
+                        btnPlayAudio.setText("Reproducir Audio");
+                    }
+                    if (tvAudioState != null) tvAudioState.setText("Audio: Grabación Lista");
                     if (onAudioRecordedSuccess != null) {
                         onAudioRecordedSuccess.run();
                     }
                     break;
                 case PLAYING:
-                    btnRecordAudio.setEnabled(false);
-                    btnPlayAudio.setText("Detener Reproducción");
-                    tvAudioState.setText("Audio: Reproduciendo...");
+                    if (btnRecordAudio != null) btnRecordAudio.setEnabled(false);
+                    if (btnPlayAudio != null) btnPlayAudio.setText("Detener Reproducción");
+                    if (tvAudioState != null) tvAudioState.setText("Audio: Reproduciendo...");
                     break;
                 case ERROR:
-                    Toast.makeText(btnRecordAudio.getContext(), "Error en el módulo de audio", Toast.LENGTH_SHORT).show();
-                    btnRecordAudio.setEnabled(true);
-                    btnPlayAudio.setEnabled(false);
-                    tvAudioState.setText("Audio: Error");
+                    if (btnRecordAudio != null) {
+                        Toast.makeText(btnRecordAudio.getContext(), "Error en el módulo de audio", Toast.LENGTH_SHORT).show();
+                        btnRecordAudio.setEnabled(true);
+                    }
+                    if (btnPlayAudio != null) btnPlayAudio.setEnabled(false);
+                    if (tvAudioState != null) tvAudioState.setText("Audio: Error");
                     break;
             }
         });
