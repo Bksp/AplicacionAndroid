@@ -1,4 +1,4 @@
-package com.example.appregistromulti;
+package com.example.registromultimedia;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.appregistromulti", appContext.getPackageName());
+        assertEquals("com.example.registromultimedia", appContext.getPackageName());
     }
 }

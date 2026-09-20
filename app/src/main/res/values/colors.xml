@@ -14,4 +14,8 @@
     <color name="verde_claro">#78A22F</color>
     <color name="fondo_oscuro">#121212</color>
     <color name="superficie_tarjeta">#1E1E1E</color>
+
+    <!-- Colores requeridos por la lista de integrantes -->
+    <color name="primary">#006341</color>
+    <color name="gray_dark">#666666</color>
 </resources>

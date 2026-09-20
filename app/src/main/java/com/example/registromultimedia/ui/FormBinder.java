@@ -15,6 +15,7 @@ import java.util.UUID;
 
 /**
  * Custom View Binder connecting Form UI elements to FormViewModel and MembersViewModel.
+ * Supports both G1 and G2 layout IDs safely.
  */
 public class FormBinder {
 
@@ -24,45 +25,62 @@ public class FormBinder {
     private final Button btnSave;
 
     public FormBinder(View rootView) {
-        etName = rootView.findViewById(R.id.etNombre);
-        spRole = rootView.findViewById(R.id.spRol);
-        etEmail = rootView.findViewById(R.id.etCorreo);
-        btnSave = rootView.findViewById(R.id.btnGuardar);
+        View vName = rootView.findViewById(R.id.etNombre);
+        if (vName == null) vName = rootView.findViewById(R.id.et_nombre);
+        etName = (vName instanceof EditText) ? (EditText) vName : null;
+
+        View vRole = rootView.findViewById(R.id.spRol);
+        if (vRole == null) vRole = rootView.findViewById(R.id.spn_rol);
+        spRole = (vRole instanceof Spinner) ? (Spinner) vRole : null;
+
+        View vEmail = rootView.findViewById(R.id.etCorreo);
+        if (vEmail == null) vEmail = rootView.findViewById(R.id.et_correo);
+        etEmail = (vEmail instanceof EditText) ? (EditText) vEmail : null;
+
+        View vSave = rootView.findViewById(R.id.btnGuardar);
+        if (vSave == null) vSave = rootView.findViewById(R.id.btn_guardar);
+        btnSave = (vSave instanceof Button) ? (Button) vSave : null;
     }
 
     public void bind(LifecycleOwner owner, FormViewModel formViewModel, MembersViewModel membersViewModel) {
-        btnSave.setOnClickListener(v -> {
-            String name = etName.getText().toString();
-            String role = spRole.getSelectedItem() != null ? spRole.getSelectedItem().toString() : "";
-            String email = etEmail.getText().toString();
-            formViewModel.registerMember(name, role, email);
-        });
+        if (btnSave != null) {
+            btnSave.setOnClickListener(v -> {
+                String name = etName != null ? etName.getText().toString() : "";
+                String role = (spRole != null && spRole.getSelectedItem() != null) ? spRole.getSelectedItem().toString() : "";
+                String email = etEmail != null ? etEmail.getText().toString() : "";
+                formViewModel.registerMember(name, role, email);
+            });
+        }
 
         formViewModel.getFormError().observe(owner, error -> {
             if (error == FormError.NONE) {
-                etName.setError(null);
-                etEmail.setError(null);
+                if (etName != null) etName.setError(null);
+                if (etEmail != null) etEmail.setError(null);
             } else if (error == FormError.EMPTY_NAME) {
-                etName.setError("El nombre es requerido");
+                if (etName != null) etName.setError("El nombre es requerido");
             } else if (error == FormError.ROLE_NOT_SELECTED) {
-                Toast.makeText(btnSave.getContext(), "Seleccione un rol", Toast.LENGTH_SHORT).show();
+                if (btnSave != null) {
+                    Toast.makeText(btnSave.getContext(), "Seleccione un rol", Toast.LENGTH_SHORT).show();
+                }
             } else if (error == FormError.INVALID_EMAIL) {
-                etEmail.setError("Ingrese un correo válido");
+                if (etEmail != null) etEmail.setError("Ingrese un correo válido");
             }
         });
 
         formViewModel.getRegistrationSuccess().observe(owner, success -> {
             if (success) {
                 String id = UUID.randomUUID().toString().substring(0, 8);
-                String name = etName.getText().toString();
-                String role = spRole.getSelectedItem() != null ? spRole.getSelectedItem().toString() : "";
-                String email = etEmail.getText().toString();
+                String name = etName != null ? etName.getText().toString() : "";
+                String role = (spRole != null && spRole.getSelectedItem() != null) ? spRole.getSelectedItem().toString() : "";
+                String email = etEmail != null ? etEmail.getText().toString() : "";
 
                 membersViewModel.addMember(new Member(id, name, role, email));
 
-                etName.setText("");
-                etEmail.setText("");
-                Toast.makeText(btnSave.getContext(), "Integrante registrado con éxito", Toast.LENGTH_SHORT).show();
+                if (etName != null) etName.setText("");
+                if (etEmail != null) etEmail.setText("");
+                if (btnSave != null) {
+                    Toast.makeText(btnSave.getContext(), "Integrante registrado con éxito", Toast.LENGTH_SHORT).show();
+                }
                 formViewModel.resetState();
             }
         });

@@ -1,4 +1,4 @@
-package com.example.appregistromulti;
+package com.example.registromultimedia;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;

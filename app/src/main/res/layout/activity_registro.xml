@@ -265,7 +265,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <!-- AQUI ESTÁ EL COMPONENTE DE TU COMPAÑERO ESTANDARIZADO -->
-                <com.example.appregistromulti.VisualizarOndas
+                <com.example.registromultimedia.VisualizarOndas
                     android:id="@+id/visualizador"
                     android:layout_width="0dp"
                     android:layout_height="120dp"

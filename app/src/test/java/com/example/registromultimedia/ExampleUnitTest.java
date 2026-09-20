@@ -1,4 +1,4 @@
-package com.example.appregistromulti;
+package com.example.registromultimedia;
 
 import org.junit.Test;
 

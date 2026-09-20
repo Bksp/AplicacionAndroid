@@ -1,4 +1,4 @@
-package com.example.appregistromulti;
+package com.example.registromultimedia;
 
 import android.content.Intent;
 import android.os.Bundle;

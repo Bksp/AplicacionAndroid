@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.appregistromulti"
+    namespace = "com.example.registromultimedia"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.appregistromulti"
+        applicationId = "com.example.registromultimedia"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
