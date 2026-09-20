@@ -1,18 +1,46 @@
 <resources>
+    <!-- Nombre de la App -->
     <string name="app_name">Registro Multimedia</string>
-    <string name="titulo_formulario">Registro de Integrante</string>
-    <string name="hint_nombre">Nombre Completo</string>
-    <string name="hint_correo">Correo Electrónico</string>
-    <string name="btn_guardar">Guardar Integrante</string>
+    <string name="inst_santo_tomas">Santo Tomás</string>
 
-    <string name="titulo_indicadores">Indicadores del Sistema</string>
-    <string name="total_integrantes">Integrantes: 0</string>
-    <string name="audios_grabados">Audios: 0</string>
+    <!-- Login -->
+    <string name="login_titulo">INICIAR SESIÓN</string>
+    <string name="login_usuario">Usuario</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_btn_ingresar">INGRESAR</string>
 
-    <string name="titulo_audio">Módulo de Audio</string>
-    <string name="btn_grabar_audio">Grabar Audio</string>
-    <string name="btn_reproducir_audio">Reproducir Audio</string>
-    <string name="estado_audio">Audio: Inactivo</string>
+    <!-- Textos Temporales UI -->
+    <string name="reproduciendo_audio">Reproduciendo Ficha de Voz</string>
+    <string name="btn_cerrar_reproductor">Cerrar Reproductor</string>
+    <string name="btn_pausa">Pausa</string>
+    <string name="btn_detener">Detener</string>
 
-    <string name="titulo_lista">Listado de Integrantes</string>
+
+    <string name="registro_titulo">Nuevo Integrante</string>
+    <string name="registro_rol">ROL DE EQUIPO</string>
+    <string name="registro_experiencia">EXPERIENCIA</string>
+    <string name="registro_exp_jr">Junior</string>
+    <string name="registro_exp_mid">Mid</string>
+    <string name="registro_exp_sr">Senior</string>
+    <string name="registro_habilidades">HABILIDADES</string>
+    <string name="registro_hab_java">Java</string>
+    <string name="registro_hab_xml">XML</string>
+    <string name="registro_hab_git">GIT</string>
+    <string name="registro_valoracion">VALORACIÓN</string>
+    <string name="registro_avance">AVANCE REGISTRO</string>
+    <string name="registro_captura">CAPTURA DE AUDIO (M4A/AAC)</string>
+    <string name="registro_btn_iniciar">Iniciar</string>
+    <string name="registro_btn_detener">Detener</string>
+    <string name="registro_btn_guardar">Guardar Integrante</string>
+
+    <!-- Textos Simulados Dashboard (Temporal hasta conectar base de datos) -->
+    <string name="dash_titulo">Equipo y Grabaciones</string>
+    <string name="dash_nombre_1">Jorge (Tú)</string>
+    <string name="dash_rol_1">Rol: Desarrollador Líder</string>
+    <string name="dash_exp_1">Experiencia: Senior</string>
+    <string name="dash_hab_1">Habilidades: Java, XML</string>
+    <string name="dash_nombre_2">Alan</string>
+    <string name="dash_rol_2">Rol: Diseñador UI</string>
+    <string name="dash_exp_2">Experiencia: Mid</string>
+    <string name="dash_btn_reproducir">Reproducir Audio (Onda)</string>
 </resources>
