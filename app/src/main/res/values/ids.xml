@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tvTotalIntegrantes" type="id"/>
+    <item name="tv_total_integrantes" type="id"/>
+    <item name="tvAudiosGrabados" type="id"/>
+    <item name="tv_audios_grabados" type="id"/>
+    <item name="etNombre" type="id"/>
+    <item name="et_nombre" type="id"/>
+    <item name="spRol" type="id"/>
+    <item name="spn_rol" type="id"/>
+    <item name="etCorreo" type="id"/>
+    <item name="et_correo" type="id"/>
+    <item name="btnGuardar" type="id"/>
+    <item name="btn_guardar" type="id"/>
+    <item name="btnGrabarAudio" type="id"/>
+    <item name="btn_iniciar_grabacion" type="id"/>
+    <item name="btnReproducirAudio" type="id"/>
+    <item name="btn_detener_grabacion" type="id"/>
+    <item name="btn_reproducir_audio_1" type="id"/>
+    <item name="tvEstadoAudio" type="id"/>
+    <item name="tv_estado_audio" type="id"/>
+    <item name="rvIntegrantes" type="id"/>
+</resources>

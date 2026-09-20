@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tema específico para el MODO OSCURO -->
+    <style name="Theme.AppRegistroMulti" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Mantenemos tus colores institucionales, pero ajustados para que no brillen tanto de noche -->
+        <item name="colorPrimary">@color/verde_claro</item>
+        <item name="colorPrimaryVariant">@color/verde_institucional</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/verde_institucional</item>
+        <item name="colorSecondaryVariant">@color/verde_claro</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Barra de estado oscura -->
+        <item name="android:statusBarColor">#121212</item>
+
+    </style>
+</resources>
