@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="roles_array">
+        <item>Seleccione un Rol...</item>
+        <item>Líder de Proyecto</item>
+        <item>Desarrollador Android</item>
+        <item>Diseñador UX/UI</item>
+        <item>QA Engineer</item>
+        <item>Arquitecto de Software</item>
+    </string-array>
+</resources>

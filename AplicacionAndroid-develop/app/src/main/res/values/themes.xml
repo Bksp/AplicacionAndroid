@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.AppRegistroMulti" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Colores Primarios (Tus verdes institucionales) -->
+        <item name="colorPrimary">@color/verde_institucional</item>
+        <item name="colorPrimaryVariant">@color/fondo_oscuro</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Colores Secundarios -->
+        <item name="colorSecondary">@color/verde_claro</item>
+        <item name="colorSecondaryVariant">@color/verde_institucional</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Color de la barra de estado superior (Hora, batería, etc.) -->
+        <item name="android:statusBarColor">@color/verde_institucional</item>
+
+    </style>
+</resources>

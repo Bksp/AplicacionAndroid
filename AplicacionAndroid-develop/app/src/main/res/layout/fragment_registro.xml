@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ScrollView principal con fondo dinámico -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fillViewport="true">
+
+    <!-- Único contenedor permitido por el estándar -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Encabezado -->
+        <TextView
+            android:id="@+id/tv_titulo_registro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/registro_titulo"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- TARJETA 1: Rol y Experiencia -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_rol_exp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:strokeColor="?attr/colorOutline"
+            app:strokeWidth="1dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_registro">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tv_label_rol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registro_rol"
+                    android:textColor="@color/verde_claro"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Spinner
+                    android:id="@+id/spn_rol"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/verde_claro"
+                    app:layout_constraintTop_toBottomOf="@id/tv_label_rol"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_label_exp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/registro_experiencia"
+                    android:textColor="@color/verde_claro"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/spn_rol"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/rg_experiencia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/tv_label_exp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/rb_junior"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/verde_institucional"
+                        android:text="@string/registro_exp_jr"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <RadioButton
+                        android:id="@+id/rb_mid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/verde_institucional"
+                        android:text="@string/registro_exp_mid"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <RadioButton
+                        android:id="@+id/rb_senior"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/verde_institucional"
+                        android:text="@string/registro_exp_sr"
+                        android:textColor="?attr/colorOnSurface" />
+                </RadioGroup>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- TARJETA 2: Habilidades y Métrica -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_habilidades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:strokeColor="?attr/colorOutline"
+            app:strokeWidth="1dp"
+            app:layout_constraintTop_toBottomOf="@id/card_rol_exp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tv_label_hab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registro_habilidades"
+                    android:textColor="@color/verde_claro"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <!-- Cadenas horizontales (Chains) en lugar de LinearLayout -->
+                <CheckBox
+                    android:id="@+id/cb_java"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:buttonTint="@color/verde_institucional"
+                    android:text="@string/registro_hab_java"
+                    android:textColor="?attr/colorOnSurface"
+                    app:layout_constraintTop_toBottomOf="@id/tv_label_hab"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/cb_xml" />
+
+                <CheckBox
+                    android:id="@+id/cb_xml"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/verde_institucional"
+                    android:text="@string/registro_hab_xml"
+                    android:textColor="?attr/colorOnSurface"
+                    app:layout_constraintTop_toTopOf="@id/cb_java"
+                    app:layout_constraintStart_toEndOf="@id/cb_java"
+                    app:layout_constraintEnd_toStartOf="@id/cb_git" />
+
+                <CheckBox
+                    android:id="@+id/cb_git"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/verde_institucional"
+                    android:text="@string/registro_hab_git"
+                    android:textColor="?attr/colorOnSurface"
+                    app:layout_constraintTop_toTopOf="@id/cb_java"
+                    app:layout_constraintStart_toEndOf="@id/cb_xml"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_label_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/registro_valoracion"
+                    android:textColor="@color/verde_claro"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/cb_java"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <RatingBar
+                    android:id="@+id/rb_valoracion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    android:progressTint="@color/verde_institucional"
+                    app:layout_constraintTop_toBottomOf="@id/tv_label_val"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_label_avance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/registro_avance"
+                    android:textColor="@color/verde_claro"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/rb_valoracion"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/pb_avance"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:max="100"
+                    android:progress="50"
+                    android:progressTint="@color/verde_claro"
+                    app:layout_constraintTop_toBottomOf="@id/tv_label_avance"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- TARJETA 3: Captura de Audio -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_captura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:strokeColor="?attr/colorOutline"
+            app:strokeWidth="1dp"
+            app:layout_constraintTop_toBottomOf="@id/card_habilidades"
+            app:layout_constraintBottom_toTopOf="@id/btn_guardar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tv_label_captura"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registro_captura"
+                    android:textColor="@color/verde_claro"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_iniciar_grabacion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/registro_btn_iniciar"
+                    app:icon="@android:drawable/ic_btn_speak_now"
+                    app:backgroundTint="@color/verde_institucional"
+                    app:rippleColor="@color/verde_claro"
+                    app:layout_constraintTop_toBottomOf="@id/tv_label_captura"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_detener_grabacion" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_detener_grabacion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/registro_btn_detener"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:textColor="?attr/colorOnSurface"
+                    app:strokeColor="@color/verde_institucional"
+                    app:rippleColor="@color/verde_claro"
+                    app:layout_constraintTop_toTopOf="@id/btn_iniciar_grabacion"
+                    app:layout_constraintStart_toEndOf="@id/btn_iniciar_grabacion"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botón principal de guardado -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_guardar"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:text="@string/registro_btn_guardar"
+            android:textSize="16sp"
+            app:cornerRadius="8dp"
+            app:backgroundTint="@color/verde_institucional"
+            app:rippleColor="@color/verde_claro"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
