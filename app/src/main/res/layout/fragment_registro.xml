@@ -353,7 +353,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
-                    <com.example.registromultimedia.VisualizarOndas
+                    <com.ipst.registromultimedia.VisualizarOndas
                         android:id="@+id/visualizador"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/audio_visualizer_height"
