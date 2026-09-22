@@ -13,70 +13,68 @@ public class AudioRecorderManager {
     private MediaRecorder mediaRecorder;
     private static final String TAG = "AudioRecorderManager";
 
-    /**
-     * Inicia la grabación del micrófono y guarda el resultado en la ruta indicada.
-     * @param outputFilePath Ruta completa donde se guardará el archivo (.m4a / .mp4)
-     */
     public void startRecording(String outputFilePath) {
         try {
-            // 1. Inicializamos el objeto MediaRecorder
             mediaRecorder = new MediaRecorder();
 
-            // 2. CONFIGURACIÓN ESTRICTA DE HARDWARE REQUERIDA
-            // Nota: El orden es vital en Android (Source -> Format -> Encoder)
+            // CONCEPTO CLAVE DE ESTUDIO: La Máquina de Estados (State Machine)
+            // MediaRecorder requiere que las configuraciones se hagan en un orden EXACTO.
+            // Si cambias el orden (ej. poner el Encoder antes del Format), la app hace "crash".
+
+            // 1. Origen (De dónde viene el sonido) -> Micrófono
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+
+            // 2. Formato del contenedor (Cómo se empaqueta el archivo) -> MPEG_4 (.m4a / .mp4)
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+
+            // 3. Codificador (Cómo se comprime el audio adentro del paquete) -> AAC (Alta calidad)
             mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
 
-            // 3. Asignamos la ruta de salida
+            // 4. Destino (Dónde se guarda)
             mediaRecorder.setOutputFile(outputFilePath);
 
-            // 4. Preparamos e iniciamos la grabación de forma segura
+            // prepare() reserva el micrófono a nivel de hardware.
             mediaRecorder.prepare();
+            // start() comienza a escribir bytes en el archivo.
             mediaRecorder.start();
 
             Log.d(TAG, "Grabación iniciada con éxito en: " + outputFilePath);
 
         } catch (IOException e) {
-            // Captura errores si la ruta de archivo es inválida o no hay permisos
+            // Ocurre si la ruta de archivo es inválida, el disco está lleno o faltan permisos de almacenamiento.
             Log.e(TAG, "Error de Entrada/Salida al preparar MediaRecorder: " + e.getMessage());
-            release(); // Forzamos liberación en caso de fallo crítico
+            release();
 
         } catch (IllegalStateException e) {
-            // Captura errores si se intentó iniciar en un estado incorrecto del ciclo de vida
+            // Ocurre si violaste la "Máquina de estados" (ej. llamaste a start() antes de prepare()).
             Log.e(TAG, "Estado ilegal del MediaRecorder: " + e.getMessage());
             release();
         }
     }
 
-    /**
-     * Detiene la grabación actual y libera los recursos de hardware.
-     */
     public void stopRecording() {
         if (mediaRecorder != null) {
             try {
                 mediaRecorder.stop();
                 Log.d(TAG, "Grabación detenida correctamente.");
             } catch (RuntimeException stopException) {
-                // RuntimeException ocurre típicamente si llamas a stop() inmediatamente
-                // después de start() sin darle tiempo al hardware de recibir datos.
+                // CONCEPTO CLAVE DE ESTUDIO: Detención prematura
+                // Si llamas a start() e inmediatamente a stop() (en milisegundos), Android lanza un error
+                // porque el archivo de audio no alcanzó a recibir metadatos y está corrupto.
                 Log.e(TAG, "Error al detener MediaRecorder (posible detención prematura): " + stopException.getMessage());
             } finally {
-                // SIEMPRE debemos liberar el micrófono al detener, pase lo que pase.
+                // Pase lo que pase en el try o en el catch, el finally se ejecuta SIEMPRE.
+                // Esto garantiza que el micrófono quede libre para otras apps (como WhatsApp o llamadas).
                 release();
             }
         }
     }
 
-    /**
-     * Libera los recursos del hardware.
-     * Es obligatorio llamarlo para evitar fugas de memoria o bloquear el micrófono a otras apps.
-     */
     public void release() {
         if (mediaRecorder != null) {
             try {
-                mediaRecorder.release();
-                mediaRecorder = null; // Lo volvemos nulo para reiniciar el ciclo de vida limpio
+                mediaRecorder.release(); // Libera el micrófono en el sistema operativo.
+                mediaRecorder = null;    // Corta la referencia en Java para que el "Garbage Collector" limpie la RAM.
                 Log.d(TAG, "Recursos de MediaRecorder liberados.");
             } catch (Exception e) {
                 Log.e(TAG, "Error intentando liberar los recursos: " + e.getMessage());
