@@ -53,4 +53,8 @@
     <string name="dash_rol_2">Rol: Diseñador UI</string>
     <string name="dash_exp_2">Experiencia: Mid</string>
     <string name="dash_btn_reproducir">Reproducir Audio (Onda)</string>
+
+    <!-- Avatares de Perfil de Integrantes -->
+    <string name="avatar_fallback_initial">?</string>
+    <string name="avatar_content_description">Avatar del integrante</string>
 </resources>

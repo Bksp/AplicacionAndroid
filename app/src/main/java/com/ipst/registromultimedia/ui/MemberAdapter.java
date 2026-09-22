@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +54,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
     }
 
     static class MemberViewHolder extends RecyclerView.ViewHolder {
+        private ImageView imgPerfil;
         private TextView tvName;
         private TextView tvRole;
         private TextView tvEmail;
@@ -60,6 +62,9 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
 
         public MemberViewHolder(@NonNull View itemView) {
             super(itemView);
+            imgPerfil = itemView.findViewById(R.id.img_perfil_item);
+            if (imgPerfil == null) imgPerfil = itemView.findViewById(R.id.ivAvatar);
+
             tvName = itemView.findViewById(R.id.tv_nombre_item);
             if (tvName == null) tvName = itemView.findViewById(R.id.tvItemNombre);
 
@@ -76,6 +81,9 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
 
         public void bind(Member member) {
             if (member == null) return;
+            if (imgPerfil != null) {
+                AvatarUtils.setAvatar(imgPerfil, member);
+            }
             if (tvName != null) {
                 tvName.setText(member.getName());
             }

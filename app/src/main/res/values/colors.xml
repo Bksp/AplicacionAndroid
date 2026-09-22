@@ -18,4 +18,18 @@
     <!-- Colores requeridos por la lista de integrantes -->
     <color name="primary">#006341</color>
     <color name="gray_dark">#666666</color>
+
+    <!-- Colores para Avatares de Perfil de Integrantes -->
+    <color name="avatar_color_1">#006341</color>
+    <color name="avatar_color_2">#1E88E5</color>
+    <color name="avatar_color_3">#E53935</color>
+    <color name="avatar_color_4">#8E24AA</color>
+    <color name="avatar_color_5">#00897B</color>
+    <color name="avatar_color_6">#FB8C00</color>
+    <color name="avatar_color_7">#3949AB</color>
+    <color name="avatar_color_8">#D81B60</color>
+    <color name="avatar_color_9">#43A047</color>
+    <color name="avatar_color_10">#5E35B1</color>
+    <color name="avatar_color_11">#00ACC1</color>
+    <color name="avatar_color_12">#6D4C41</color>
 </resources>

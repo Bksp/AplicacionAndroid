@@ -8,4 +8,20 @@
         <item>QA Engineer</item>
         <item>Arquitecto de Software</item>
     </string-array>
+
+    <!-- Matriz de Colores para Avatares -->
+    <array name="avatar_colors">
+        <item>@color/avatar_color_1</item>
+        <item>@color/avatar_color_2</item>
+        <item>@color/avatar_color_3</item>
+        <item>@color/avatar_color_4</item>
+        <item>@color/avatar_color_5</item>
+        <item>@color/avatar_color_6</item>
+        <item>@color/avatar_color_7</item>
+        <item>@color/avatar_color_8</item>
+        <item>@color/avatar_color_9</item>
+        <item>@color/avatar_color_10</item>
+        <item>@color/avatar_color_11</item>
+        <item>@color/avatar_color_12</item>
+    </array>
 </resources>
