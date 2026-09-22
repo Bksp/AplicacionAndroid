@@ -15,7 +15,7 @@
         android:background="?attr/colorSurface"
         app:title="@string/dash_titulo"
         app:titleTextAppearance="?attr/textAppearanceHeadlineSmall"
-        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIcon="@drawable/ic_logout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

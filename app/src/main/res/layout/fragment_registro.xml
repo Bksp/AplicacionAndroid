@@ -383,14 +383,14 @@
                         android:layout_height="@dimen/input_min_height"
                         android:layout_marginStart="@dimen/spacing_small"
                         android:text="@string/registro_btn_detener"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:textColor="?attr/colorOnSurface"
+                        android:textColor="@color/white"
                         app:cornerRadius="@dimen/card_corner_radius"
-                        app:strokeColor="?attr/colorPrimary"
-                        app:rippleColor="?attr/colorSecondary"
-                        app:layout_constraintTop_toTopOf="@id/btn_iniciar_grabacion"
+                        app:icon="@drawable/ic_stop"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/btn_iniciar_grabacion"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/btn_iniciar_grabacion"
+                        app:rippleColor="?attr/colorSecondary"
+                        app:strokeColor="?attr/colorPrimary" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>

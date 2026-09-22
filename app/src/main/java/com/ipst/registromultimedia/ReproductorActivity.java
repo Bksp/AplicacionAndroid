@@ -1,5 +1,6 @@
 package com.ipst.registromultimedia;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -27,6 +28,7 @@ public class ReproductorActivity extends AppCompatActivity {
     private Handler progressHandler;
     private Runnable progressRunnable;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
