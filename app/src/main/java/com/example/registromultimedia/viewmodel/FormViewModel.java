@@ -3,16 +3,27 @@ package com.example.registromultimedia.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import com.example.registromultimedia.domain.usecase.ValidateMemberFormUseCase;
 import com.example.registromultimedia.model.FormError;
 
 /**
  * ViewModel managing member registration form validation logic.
- * Strictly decoupled from Android UI classes.
+ * Consumes exclusivamente el Caso de Uso ValidateMemberFormUseCase de la capa Domain.
+ * Strictly decoupled from Android UI and Data classes.
  */
 public class FormViewModel extends ViewModel {
 
     private final MutableLiveData<FormError> formError = new MutableLiveData<>(FormError.NONE);
     private final MutableLiveData<Boolean> registrationSuccess = new MutableLiveData<>(false);
+    private final ValidateMemberFormUseCase validateMemberFormUseCase;
+
+    public FormViewModel() {
+        this(new ValidateMemberFormUseCase());
+    }
+
+    public FormViewModel(ValidateMemberFormUseCase validateMemberFormUseCase) {
+        this.validateMemberFormUseCase = validateMemberFormUseCase;
+    }
 
     public LiveData<FormError> getFormError() {
         return formError;
@@ -23,23 +34,17 @@ public class FormViewModel extends ViewModel {
     }
 
     public void registerMember(String name, String role, String email) {
-        if (name == null || name.trim().isEmpty()) {
-            formError.setValue(FormError.EMPTY_NAME);
-            return;
-        }
+        FormError error = validateMemberFormUseCase != null
+                ? validateMemberFormUseCase.execute(name, role, email)
+                : FormError.NONE;
 
-        if (role == null || role.trim().isEmpty()) {
-            formError.setValue(FormError.ROLE_NOT_SELECTED);
-            return;
-        }
+        formError.setValue(error);
 
-        if (email == null || !email.contains("@")) {
-            formError.setValue(FormError.INVALID_EMAIL);
-            return;
+        if (error == FormError.NONE) {
+            registrationSuccess.setValue(true);
+        } else {
+            registrationSuccess.setValue(false);
         }
-
-        formError.setValue(FormError.NONE);
-        registrationSuccess.setValue(true);
     }
 
     public void resetState() {

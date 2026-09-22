@@ -1,5 +1,6 @@
 package com.example.registromultimedia;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
             } else if (usuario.equals("admin") && password.equals("1234")) {
                 Toast.makeText(MainActivity.this, "¡Credenciales correctas! Entrando...", Toast.LENGTH_SHORT).show();
 
-                // Ahora el Login nos lleva al Dashboard
-                android.content.Intent intent = new android.content.Intent(MainActivity.this, DashboardActivity.class);
+                Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                 startActivity(intent);
+                finish();
                 // 3. Bloqueamos credenciales incorrectas
             } else {
                 Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();

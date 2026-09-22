@@ -1,19 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.AppRegistroMulti" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Base application theme usando Material 3 con soporte para Dynamic Colors (Material You) -->
+    <style name="Theme.AppRegistroMulti" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <!-- Colores Primarios (Tus verdes institucionales) -->
+        <!-- Colores Primarios (Fallback para dispositivos sin Dynamic Colors) -->
         <item name="colorPrimary">@color/verde_institucional</item>
-        <item name="colorPrimaryVariant">@color/fondo_oscuro</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Colores Secundarios -->
         <item name="colorSecondary">@color/verde_claro</item>
-        <item name="colorSecondaryVariant">@color/verde_institucional</item>
         <item name="colorOnSecondary">@color/white</item>
 
-        <!-- Color de la barra de estado superior (Hora, batería, etc.) -->
-        <item name="android:statusBarColor">@color/verde_institucional</item>
+        <!-- Fondo y Superficies del sistema -->
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorOnSurfaceVariant">@color/gray_dark</item>
+        <item name="colorOutline">@color/verde_claro</item>
+
+        <!-- Barra de estado del sistema (Reloj, Batería) visible arriba -->
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:fitsSystemWindows">true</item>
 
     </style>
 </resources>

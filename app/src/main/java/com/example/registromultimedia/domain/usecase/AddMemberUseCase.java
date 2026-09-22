@@ -1,6 +1,7 @@
 package com.example.registromultimedia.domain.usecase;
 
 import com.example.registromultimedia.domain.MemberRepository;
+import com.example.registromultimedia.domain.MemberRepositoryProvider;
 import com.example.registromultimedia.model.Member;
 
 /**
@@ -11,6 +12,13 @@ import com.example.registromultimedia.model.Member;
 public class AddMemberUseCase {
 
     private final MemberRepository repository;
+
+    /**
+     * Constructor por defecto que obtiene el repositorio registrado.
+     */
+    public AddMemberUseCase() {
+        this(MemberRepositoryProvider.getInstance());
+    }
 
     /**
      * Constructor para inyección del repositorio.

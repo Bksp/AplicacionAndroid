@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.google.android.material.color.MaterialColors;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,8 @@ public class VisualizarOndas extends View {
     }
 
     private void inicializar() {
+        int colorTema = MaterialColors.getColor(this, androidx.appcompat.R.attr.colorPrimary, Color.parseColor("#006341"));
+
         // Estilo de las ondas grises
         lapizOndas = new Paint();
         lapizOndas.setColor(Color.parseColor("#9E9E9E")); // Gris claro
@@ -34,9 +38,9 @@ public class VisualizarOndas extends View {
         lapizOndas.setStrokeCap(Paint.Cap.ROUND); // Puntas redondeadas
         lapizOndas.setAntiAlias(true);
 
-        // Estilo de la línea roja central
+        // Estilo de la línea central con color del tema
         lapizCentro = new Paint();
-        lapizCentro.setColor(Color.parseColor("#FF5252")); // Rojo salmón
+        lapizCentro.setColor(colorTema);
         lapizCentro.setStrokeWidth(4f);
         lapizCentro.setAntiAlias(true);
     }
@@ -65,7 +69,7 @@ public class VisualizarOndas extends View {
         int centroY = alto / 2;
         int centroX = ancho / 2;
 
-        // 1. Dibujar la línea roja fija en el centro
+        // 1. Dibujar la línea fija en el centro con el color del tema
         canvas.drawLine(centroX, centroY - 80, centroX, centroY + 80, lapizCentro);
 
         // 2. Dibujar el historial de ondas moviéndose hacia la izquierda

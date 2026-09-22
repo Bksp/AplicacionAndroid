@@ -1,5 +1,6 @@
 package com.example.registromultimedia.data;
 
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.util.Log;
@@ -98,5 +99,38 @@ public class AudioRecorder {
             mediaPlayer.release();
             mediaPlayer = null;
         }
+    }
+
+    public int getDuration() {
+        if (mediaPlayer != null) {
+            try {
+                return mediaPlayer.getDuration();
+            } catch (Exception e) {
+                Log.w(TAG, "Error getting mediaPlayer duration", e);
+            }
+        }
+        if (outputFilePath != null && new File(outputFilePath).exists()) {
+            try (MediaMetadataRetriever mmr = new MediaMetadataRetriever()) {
+                mmr.setDataSource(outputFilePath);
+                String durationStr = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+                if (durationStr != null) {
+                    return Integer.parseInt(durationStr);
+                }
+            } catch (Exception e) {
+                Log.w(TAG, "Error extracting duration with MediaMetadataRetriever", e);
+            }
+        }
+        return 0;
+    }
+
+    public int getCurrentPosition() {
+        if (mediaPlayer != null) {
+            try {
+                return mediaPlayer.getCurrentPosition();
+            } catch (Exception e) {
+                Log.w(TAG, "Error getting mediaPlayer current position", e);
+            }
+        }
+        return 0;
     }
 }

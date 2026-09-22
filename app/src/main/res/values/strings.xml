@@ -5,6 +5,7 @@
 
     <!-- Login -->
     <string name="login_titulo">INICIAR SESIÓN</string>
+    <string name="login_credenciales_hint">admin / 1234</string>
     <string name="login_usuario">Usuario</string>
     <string name="login_password">Contraseña</string>
     <string name="login_btn_ingresar">INGRESAR</string>
@@ -17,7 +18,12 @@
 
 
     <string name="registro_titulo">Nuevo Integrante</string>
+    <string name="registro_datos">DATOS PERSONALES</string>
+    <string name="registro_nombre">Nombres</string>
+    <string name="registro_apellido">Apellidos</string>
+    <string name="registro_correo">Correo Electrónico</string>
     <string name="registro_rol">ROL DE EQUIPO</string>
+    <string name="hint_seleccione_rol">Seleccione un rol</string>
     <string name="registro_experiencia">EXPERIENCIA</string>
     <string name="registro_exp_jr">Junior</string>
     <string name="registro_exp_mid">Mid</string>
@@ -26,6 +32,8 @@
     <string name="registro_hab_java">Java</string>
     <string name="registro_hab_xml">XML</string>
     <string name="registro_hab_git">GIT</string>
+    <string name="registro_hab_android">Android Studio</string>
+    <string name="registro_hab_mvvm">MVVM</string>
     <string name="registro_valoracion">VALORACIÓN</string>
     <string name="registro_avance">AVANCE REGISTRO</string>
     <string name="registro_captura">CAPTURA DE AUDIO (M4A/AAC)</string>
@@ -35,6 +43,8 @@
 
     <!-- Textos Simulados Dashboard (Temporal hasta conectar base de datos) -->
     <string name="dash_titulo">Equipo y Grabaciones</string>
+    <string name="action_logout">Cerrar sesión</string>
+    <string name="action_back">Volver</string>
     <string name="dash_nombre_1">Jorge (Tú)</string>
     <string name="dash_rol_1">Rol: Desarrollador Líder</string>
     <string name="dash_exp_1">Experiencia: Senior</string>

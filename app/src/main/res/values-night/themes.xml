@@ -1,18 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Tema específico para el MODO OSCURO -->
-    <style name="Theme.AppRegistroMulti" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Tema específico para el MODO OSCURO (Material 3) -->
+    <style name="Theme.AppRegistroMulti" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <!-- Mantenemos tus colores institucionales, pero ajustados para que no brillen tanto de noche -->
+        <!-- Colores Primarios en modo oscuro -->
         <item name="colorPrimary">@color/verde_claro</item>
-        <item name="colorPrimaryVariant">@color/verde_institucional</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
 
+        <!-- Colores Secundarios -->
         <item name="colorSecondary">@color/verde_institucional</item>
-        <item name="colorSecondaryVariant">@color/verde_claro</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
 
-        <!-- Barra de estado oscura -->
-        <item name="android:statusBarColor">#121212</item>
+        <!-- Fondo y Superficies del sistema en modo oscuro -->
+        <item name="colorSurface">@color/fondo_oscuro</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorOnSurfaceVariant">#AAAAAA</item>
+        <item name="colorOutline">@color/verde_claro</item>
+
+        <!-- Barra de estado del sistema en modo oscuro -->
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:fitsSystemWindows">true</item>
 
     </style>
 </resources>

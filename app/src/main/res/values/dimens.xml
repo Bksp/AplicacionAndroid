@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Espaciados y Márgenes basados en la cuadrícula de 8dp de Material Design -->
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_extra_large">32dp</dimen>
+
+    <!-- Compatibilidad con variables previas -->
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
-    <dimen name="padding_card">12dp</dimen>
+
+    <!-- Tarjetas de Material 3 -->
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_stroke_width">1dp</dimen>
+    <dimen name="padding_card">16dp</dimen>
+
+    <!-- Tamaños de Texto / Tipografía -->
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_medium">16sp</dimen>
     <dimen name="text_size_title">18sp</dimen>
+    <dimen name="text_size_headline">22sp</dimen>
+    <dimen name="text_size_display">32sp</dimen>
+
+    <!-- Tamaños de Componentes Botones e Íconos -->
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="input_min_height">48dp</dimen>
     <dimen name="avatar_size">48dp</dimen>
+    <dimen name="avatar_size_large">64dp</dimen>
+    <dimen name="audio_visualizer_height">100dp</dimen>
 </resources>

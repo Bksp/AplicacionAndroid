@@ -8,6 +8,12 @@ package com.example.registromultimedia.domain;
 public interface AudioRepository {
 
     /**
+     * Establece la ruta absoluta del archivo de audio para grabación y reproducción.
+     * @param path Ruta del archivo de audio.
+     */
+    void setAudioPath(String path);
+
+    /**
      * Verifica si existe un archivo de grabación guardado y no vacío.
      * @return true si existe una grabación válida, false en caso contrario.
      */
@@ -41,4 +47,16 @@ public interface AudioRepository {
      * Detiene la reproducción de audio activa.
      */
     void stopPlayback();
+
+    /**
+     * Obtiene la duración total del audio grabado en milisegundos.
+     * @return Duración en milisegundos.
+     */
+    int getDuration();
+
+    /**
+     * Obtiene la posición actual de la reproducción en milisegundos.
+     * @return Posición actual en milisegundos.
+     */
+    int getCurrentPosition();
 }

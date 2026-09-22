@@ -1,66 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Regla 4: Uso de MaterialCardView con elevación 4dp y bordes 8dp -->
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="8dp"
-    app:cardBackgroundColor="?attr/colorSurface"> <!-- Se adapta al Modo Claro/Oscuro -->
+    android:layout_margin="@dimen/spacing_small"
+    app:cardElevation="@dimen/card_elevation"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardBackgroundColor="?attr/colorSurface">
 
-    <!-- Regla 2: ConstraintLayout Interno -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="@dimen/padding_card">
 
-        <!-- Placeholder para la foto (Temporal) -->
         <ImageView
             android:id="@+id/img_perfil_item"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="@dimen/avatar_size_large"
+            android:layout_height="@dimen/avatar_size_large"
             android:src="@mipmap/ic_launcher_round"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- Nombre del Integrante -->
         <TextView
             android:id="@+id/tv_nombre_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Nombre Integrante"
-            android:textSize="18sp"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textStyle="bold"
             android:textColor="?attr/colorOnSurface"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/spacing_medium"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_perfil_item"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Rol del Integrante -->
         <TextView
             android:id="@+id/tv_rol_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Rol: Desarrollador"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorSecondary"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_tiny"
             app:layout_constraintTop_toBottomOf="@id/tv_nombre_item"
             app:layout_constraintStart_toEndOf="@id/img_perfil_item"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Botón Reproducir (MaterialButton Estándar) -->
+        <TextView
+            android:id="@+id/tv_correo_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            app:layout_constraintTop_toBottomOf="@id/tv_rol_item"
+            app:layout_constraintStart_toEndOf="@id/img_perfil_item"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_reproducir_item"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/input_min_height"
             android:text="Reproducir Audio"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/spacing_medium"
             app:icon="@android:drawable/ic_media_play"
-            app:backgroundTint="@color/verde_institucional"
+            app:cornerRadius="@dimen/card_corner_radius"
+            app:backgroundTint="?attr/colorPrimary"
             app:layout_constraintTop_toBottomOf="@id/img_perfil_item"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
