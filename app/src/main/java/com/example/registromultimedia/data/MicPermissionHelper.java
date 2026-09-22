@@ -1,4 +1,4 @@
-package com.example.registromultimedia.ui;
+package com.example.registromultimedia.data;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
